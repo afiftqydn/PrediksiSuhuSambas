@@ -1,0 +1,9 @@
+*EDA
+-Hitung Jumlah data dan tipe data
+-Handle Missing Value
+-Check and handle Outlier
+-Distribusi Data
+-Target = Curah Hujan (RR)
+
+*Data Cleansing and Transformation
+-
