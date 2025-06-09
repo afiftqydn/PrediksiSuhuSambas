@@ -18,8 +18,8 @@ st.set_page_config(
 # =========================
 # PATHS TO PICKLE FILES
 # =========================
-MODEL_PATH = "model/rf_cuaca.pkl"
-DATA_SAMPLE_PATH = "dataset.pkl"
+MODEL_PATH = "model/rfr_cuaca.pkl"
+DATA_SAMPLE_PATH = "dataset2.pkl"
 DESCRIPTIVE_STATS_PATH = "descriptive_stats.pkl"
 
 # =========================
@@ -30,10 +30,21 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     @import url('https://fonts.googleapis.com/icon?family=Material+Icons'); /* Tambahan untuk Material Icons */
     
+    /* Upaya untuk memaksa tema terang */
+    html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stSidebar"] {
+        /* Variabel tema dasar Streamlit - coba timpa ke nilai terang */
+        /* Ini mungkin tidak selalu berhasil menimpa semua, tetapi patut dicoba */
+        --background-color: #f0f4f8 !important;
+        --secondary-background-color: #f8fafb !important;
+        --text-color: #1d2829 !important;
+        --primary-color: #2c99a3 !important; /* Warna primer aplikasi Anda */
+    }
+
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
-    }
-    
+        color: #1d2829 !important; /* PASTIKAN WARNA TEKS DEFAULT GELAP (untuk latar terang) */
+        background-color: #f0f4f8 !important; /* WARNA LATAR BELAKANG UTAMA TERANG */
+    }    
     /* Button styling */
     div.stButton > button:first-child {
         background: linear-gradient(135deg, #2c99a3 0%, #2b8a94 100%) !important;
@@ -250,7 +261,7 @@ if menu == "Dashboard": # Sekarang menu langsung berisi "Dashboard", "Analytics"
             <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0 0; font-size: 1.1em;">Ringkasan dan Analisis Sistem</p>
         </div>""", unsafe_allow_html=True)
     
-    st.subheader("Statistik Cepat (Data Simulasi)")
+    st.subheader("Statistik Cepat (Dataset)")
     cols_metric = st.columns(4)
     metrics_data = [
         {"label": "Suhu Rata-rata", "value": "27.5°C", "delta": "0.2°C", "icon": "thermostat"},
@@ -266,7 +277,7 @@ if menu == "Dashboard": # Sekarang menu langsung berisi "Dashboard", "Analytics"
     col_chart, col_accuracy = st.columns([2, 1])
     with col_chart:
         with st.container(border=True): 
-            st.markdown("<h3 style='color: #2c99a3; margin-bottom: 15px;'><span class='material-icons' style='vertical-align: middle; margin-right: 5px;'>trending_up</span>Tren Suhu Terkini (Simulasi)</h3>", unsafe_allow_html=True)
+            st.markdown("<h3 style='color: #2c99a3; margin-bottom: 15px;'><span class='material-icons' style='vertical-align: middle; margin-right: 5px;'>trending_up</span>Tren Suhu 7 Hari Terakhir (Dataset)</h3>", unsafe_allow_html=True)
             fig = create_weather_chart(27.5) 
             st.plotly_chart(fig, use_container_width=True)
     with col_accuracy:
